@@ -8,23 +8,23 @@ import Cython.Compiler.Options
 from sage.env import sage_include_directories
 
 ext_modules = [
-        Extension('automata.kolakoski_word_pyx',
-            sources = [path.join('slabbe','kolakoski_word_pyx.pyx')],),
-        Extension('slabbe.mult_cont_frac_pyx',
-            sources = [path.join('slabbe','mult_cont_frac_pyx.pyx')],
-            include_dirs=sage_include_directories()),
-        Extension('slabbe.diophantine_approx_pyx',
-            sources = [path.join('slabbe','diophantine_approx_pyx.pyx')],
+        Extension('automata.cautomata',
+            sources = [path.join('automata','cautomata.pyx'),
+                      path.join('automata','automataC.c''),
+                      path.join('automata','cautomata.pyx'),],
+            header = [path.join('automata','automataC.h'),
+                      path.join('automata','cautomata.pxd'),
+                      path.join('automata', 'Automaton.h')],
             include_dirs=sage_include_directories())]
 
-# Get the long description from the README file
+# Get the long description from the README file)
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='Automata',
     version=open("VERSION").read().strip(),
-    description="Sebastien Labbe's Research code",
+    description="Tools to manipulate automata efficiently in Sage math. ",
     long_description=long_description,
     classifiers=[
       # How mature is this project? Common values are
@@ -37,7 +37,7 @@ setup(name='Automata',
       'Programming Language :: Python :: 2.7',
       'Topic :: Scientific/Engineering :: Mathematics',
     ],
-    keywords='sagemath combinatorics discrete geometry symbolic dynamics',
+    keywords='sagemath combinatorics automata deterministics automata',
     author='Paul Mercat and Dominique Benielli',
     author_email='paul.mercat[A]univ-amu.fr.antispam'+
                  'dominique.benielli[A]univ-amu.fr.antispam' ,
@@ -50,3 +50,4 @@ setup(name='Automata',
     packages=['automata'],
     ext_modules=cythonize(ext_modules),
 )
+
