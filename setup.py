@@ -10,7 +10,7 @@ from sage.env import sage_include_directories
 ext_modules = [
         Extension('automata.cautomata',
             sources = [path.join('automata','cautomata.pyx'),
-                      path.join('automata','automataC.c''),
+                      path.join('automata','automataC.c'),
                       path.join('automata','cautomata.pyx'),],
             header = [path.join('automata','automataC.h'),
                       path.join('automata','cautomata.pxd'),
